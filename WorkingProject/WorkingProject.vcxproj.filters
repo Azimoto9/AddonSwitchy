@@ -27,12 +27,6 @@
     <ClInclude Include="classes.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="XUnzip.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="XZip.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
