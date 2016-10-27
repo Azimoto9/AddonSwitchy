@@ -58,15 +58,15 @@ public:
 	inline bool exists(std::string& name) {
 		struct stat buffer;
 		return (stat(name.c_str(), &buffer) == 0);
-	}
+	};
 	void finder() {
-		
+		//method to find the WoW Folder goes here
 	};
 	void zipper(){
-
+		//method to make a zip file containing interface and WTF folders go here
 	};
 	void unzipper(){
-
+		//method to delete current wtf and interface folders and unzip a backup goes here
 	};
 };
 
@@ -81,14 +81,14 @@ void doBak(string paths) {
 	string fileChecker = paths + timed + zipp;
 
 	if (backed.exists(fileChecker) == true) {
-		cout << "\nit works\n" << fileChecker << " exists\n";
+		cout << "dun goofed";
 	}
 	else if (backed.exists(fileChecker) == false){
-		cout << "\nit still works\n" << fileChecker << " does not exist\n";
+		//time to pull the files i need and create a zip file
+		cout << "wat";
+
 	}
 }
-
-
 
 void mkbak(string path) {
 	struct stat info;
