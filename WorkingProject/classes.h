@@ -22,6 +22,8 @@ public:
 	
 		if (cst.back() != test.back()) {
 			cst = cst.append(test);
+			//checks if / is at the end so as to not create a folder named /pathfolder
+			//instead of path/folder or a file called /folderfile
 		}
 		dated = string(cst) + date;
 		replace(dated.begin(), dated.end(), '/', '-');
@@ -47,7 +49,8 @@ public:
 
 	};
 private:
-	
+	string found;
+	bool ifFound;
 public:
 	backer() {
 		
@@ -57,7 +60,7 @@ public:
 		return (stat(name.c_str(), &buffer) == 0);
 	}
 	void finder() {
-
+		
 	};
 	void zipper(){
 
@@ -67,14 +70,21 @@ public:
 	};
 };
 
-void doBak(string path) {
+void doBak(string paths) {
 	backer backed;
-	path = path.append(".zip");
-	if (backed.exists(path) == true) {
-		cout << "\nit works\n" << path << "\n";
+	char time[9];
+	string timed;
+	string zipp = ".zip";
+	_strtime_s(time);
+	timed = time;
+	replace(timed.begin(), timed.end(), ':', '.');
+	string fileChecker = paths + timed + zipp;
+
+	if (backed.exists(fileChecker) == true) {
+		cout << "\nit works\n" << fileChecker << " exists\n";
 	}
-	else if (backed.exists(path) == false){
-		cout << "\nit still works\n" << path << "\n";
+	else if (backed.exists(fileChecker) == false){
+		cout << "\nit still works\n" << fileChecker << " does not exist\n";
 	}
 }
 
