@@ -65,23 +65,23 @@ public:
 		struct stat buffer;
 		return (stat(name.c_str(), &buffer) == 0);
 	};
-	void zipper() {
+	void zipper(string backupName) {
 		//method to make a zip file containing interface and WTF folders go here
 	};
-	void unzipper() {
+	void unzipper(string backupName) {
 		//method to delete current wtf and interface folders and unzip a backup goes here
 	};
 	void wowFinder() {
-
+		string workingFile;
 		for (int i = 0; i <= 3; ++i) {
-			string workingFile = wlocations[i];
+			workingFile = wlocations[i];
 			workingFile.append("Wow.exe");
 			if (exists(workingFile) == true) {
 				cout << "Wow folder found at: " << wlocations[i] << "\n";
 				localFolder = wlocations[i];
 				found = true;
 				break;
-			};
+			}
 		}
 
 
@@ -99,13 +99,15 @@ public:
 		string fileChecker = paths + timed + zipp;
 
 		if (backed.exists(fileChecker) == true) {
-			cout << "File Already exists!";
+			cout << "\nFile Already exists!";
 		}
 		else if (backed.exists(fileChecker) == false) {
 			//time to pull the files i need and create a zip file
 			backed.wowFinder();
 			if (found == false) {
 				//ask user for input
+				cout << "\nWoW Folder not found!";
+				cout << "\nPlease input WoW directory: ";
 				cin >> localFolder;
 				//initiate transfer and zip
 			}
