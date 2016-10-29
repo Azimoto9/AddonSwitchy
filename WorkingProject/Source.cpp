@@ -45,19 +45,26 @@ int main() {
 	cout << Art << "\n" << "Enter a Command: ";
 	cin >> commandLine;
 
+	string commands[4] = { "mkbak", "exit", "", "" };
 	while (exit != 1) {
 
-		if (commandLine == "mkbak") {
+		if (commandLine == commands[0]) {
 			mkbak("C:\\users\\austin\\Downloads");
-			cout << "\nEnter a Command: ";
-			cin >> commandLine;
+		cout << "\nEnter a Command: ";
+		cin >> commandLine;
+	}
+		else if (commandLine == commands[1]) {
+			exit = 1;
 		}
-		else { cout << "\nInvalid Command"; 
+		else {
+			cout << "\nInvalid Command";
 			cout << "\nEnter a Command: ";
 			cin >> commandLine;
 		};
+		}
+		
 
 
-	}
 }
+
 
