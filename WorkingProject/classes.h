@@ -56,7 +56,7 @@ public:
 	};
 private:
 	bool ifFound; //unused for now
-	string wlocations[4] = {"C:\\World of Warcraft\\Wow.exe","D:\\World of Warcraft\\Wow.exe","C:\\Program Files (x86)\\World of Warcraft\\Wow.exe","C:\\Program Files\\World of Warcraft\\Wow.exe"};
+	string wlocations[4] = {"C:\\World of Warcraft\\" , "D:\\World of Warcraft\\","C:\\Program Files (x86)\\World of Warcraft\\","C:\\Program Files\\World of Warcraft\\"};
 public:
 	backer() {
 
@@ -74,7 +74,9 @@ public:
 	void wowFinder() {
 
 		for (int i = 0; i <= 3; ++i) {
-			if (exists(wlocations[i]) == true) {
+			string workingFile = wlocations[i];
+			workingFile.append("Wow.exe");
+			if (exists(workingFile) == true) {
 				cout << "Wow folder found at: " << wlocations[i] << "\n";
 				localFolder = wlocations[i];
 				found = true;
