@@ -8,7 +8,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <array>
 using namespace std;
+
+
+string localFolder = "";
+bool found = false;
+
 
 class dateFolder {
 
@@ -42,62 +48,86 @@ public:
 
 };
 
-class backer{
+class backer {
 
 public:
 	backer(string path) {
 
 	};
 private:
-	string found;
-	bool ifFound;
+	bool ifFound; //unused for now
+	string wlocations[4] = {"C:\\World of Warcraft\\Wow.exe","D:\\World of Warcraft\\Wow.exe","C:\\Program Files (x86)\\World of Warcraft\\Wow.exe","C:\\Program Files\\World of Warcraft\\Wow.exe"};
 public:
 	backer() {
-		
+
 	};
 	inline bool exists(std::string& name) {
 		struct stat buffer;
 		return (stat(name.c_str(), &buffer) == 0);
 	};
-	void finder() {
-		//method to find the WoW Folder goes here
-	};
-	void zipper(){
+	void zipper() {
 		//method to make a zip file containing interface and WTF folders go here
 	};
-	void unzipper(){
+	void unzipper() {
 		//method to delete current wtf and interface folders and unzip a backup goes here
 	};
+	void wowFinder() {
+
+		for (int i = 0; i <= 3; ++i) {
+			if (exists(wlocations[i]) == true) {
+				cout << "Wow folder found at: " << wlocations[i] << "\n";
+				localFolder = wlocations[i];
+				found = true;
+				break;
+			};
+		}
+
+
+	}
 };
 
-void doBak(string paths) {
-	backer backed;
-	char time[9];
-	string timed;
-	string zipp = ".zip";
-	_strtime_s(time);
-	timed = time;
-	replace(timed.begin(), timed.end(), ':', '.');
-	string fileChecker = paths + timed + zipp;
+	void doBak(string paths) {
+		backer backed;
+		char time[9];
+		string timed;
+		string zipp = ".zip";
+		_strtime_s(time);
+		timed = time;
+		replace(timed.begin(), timed.end(), ':', '.');
+		string fileChecker = paths + timed + zipp;
 
-	if (backed.exists(fileChecker) == true) {
-		cout << "dun goofed";
+		if (backed.exists(fileChecker) == true) {
+			cout << "File Already exists!";
+		}
+		else if (backed.exists(fileChecker) == false) {
+			//time to pull the files i need and create a zip file
+			backed.wowFinder();
+			if (found == false) {
+				//ask user for input
+				cin >> localFolder;
+				//initiate transfer and zip
+			}
+			else {
+				//initiate transfer and zip
+			};
+
+
+		};
+
+
+
 	}
-	else if (backed.exists(fileChecker) == false){
-		//time to pull the files i need and create a zip file
-		cout << "wat";
 
-	}
-}
 
-void mkbak(string path) {
-	struct stat info;
-	dateFolder timeget(path);
-	if (stat(path.c_str(), &info) != 0)
-		printf("cannot access %s\n", timeget.dated.c_str());
-	else if (info.st_mode & S_IFDIR) {
-		printf("Creating directory %s\n", timeget.dated.c_str());
-		timeget.createBackupDir();
-		doBak(timeget.dated);
+	void mkbak(string path) {
+		struct stat info;
+		dateFolder timeget(path);
+		if (stat(path.c_str(), &info) != 0) {
+			printf("cannot access %s\n", timeget.dated.c_str());
+		}
+		else if (info.st_mode & S_IFDIR) {
+			printf("Creating directory %s\n", timeget.dated.c_str());
+			timeget.createBackupDir();
+			doBak(timeget.dated);
+		};
 	};
-};
