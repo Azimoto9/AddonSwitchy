@@ -41,11 +41,13 @@ int main() {
 	string commandLine;
 	int exit = 0;
 	ifstream Reader("ascii.txt");
+	ifstream help("help.txt");
+	string helper = getFileContents(help);
 	string Art = getFileContents(Reader);
 	cout << Art << "\n" << "Enter a Command: ";
 	cin >> commandLine;
 
-	string commands[4] = { "mkbak", "exit", "", "" };
+	string commands[4] = { "mkbak", "exit", "help", "" };
 	while (exit != 1) {
 
 		if (commandLine == commands[0]) {
@@ -53,6 +55,11 @@ int main() {
 		cout << "\nEnter a Command: ";
 		cin >> commandLine;
 	}
+		else if (commandLine == commands[2]) {
+			cout << "\n" <<helper << "\n";
+			cout << "\nEnter a Command: ";
+			cin >> commandLine;
+		}
 		else if (commandLine == commands[1]) {
 			exit = 1;
 		}
